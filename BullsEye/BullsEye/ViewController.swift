@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        restartButton()
+        startNewGame()
         updateLabels()
     }
 
@@ -55,17 +55,23 @@ class ViewController: UIViewController {
         
         let message = "You scored \(points) points"
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        let action = UIAlertAction(title: "Ok", style: .default,
+                                   handler: { action in
+                                                self.startNewRound()
+                                                self.updateLabels()
+                                            })
         
         alert.addAction(action)
-        
         present(alert, animated: true, completion: nil)
         
-        restartButton()
+    }
+    
+    @IBAction func startOverButton() {
+        startNewGame()
         updateLabels()
     }
     
-    @IBAction func restartButton() {
+    @IBAction func startNewRound() {
         roundNumber += 1
         targetValue = 1 + Int(arc4random_uniform(100))
         currentValue = 50
@@ -78,5 +84,11 @@ class ViewController: UIViewController {
         scoreLabel.text = String(score)
     }
 
+    func startNewGame() {
+        score = 0
+        roundNumber = 0
+        startNewRound()
+    }
+    
 }
 
