@@ -104,6 +104,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="slider" destination="lJe-Y6-sEG" id="zsx-SI-u8x"/>
+                        <outlet property="targetLabel" destination="7Ft-6t-3HQ" id="6K8-TT-Nm6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
