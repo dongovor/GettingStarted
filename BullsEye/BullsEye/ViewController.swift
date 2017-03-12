@@ -12,14 +12,19 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var targetLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var roundNumberLabel: UILabel!
     
-    
-    var currentValue: Int = 50
+    var currentValue: Int = 0
     var targetValue: Int = 0
+    var score: Int = 0
+    var roundNumber: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         restartButton()
+        updateLabels()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +37,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showAlert(){
-        let message = "The value of the slider is: \(currentValue)" + "\n The target value is: \(targetValue)"
+        let diff = abs(targetValue - currentValue)
+        let points = 100 - diff
+        
+        score += points
+        
+        let message = "You scored \(points) points"
         let alert = UIAlertController(title: "Title text", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
         
@@ -41,12 +51,20 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
         
         restartButton()
+        updateLabels()
     }
     
     @IBAction func restartButton() {
+        roundNumber += 1
         targetValue = 1 + Int(arc4random_uniform(100))
         currentValue = 50
         slider.value = Float(currentValue)
+    }
+    
+    func updateLabels() {
+        roundNumberLabel.text = String(roundNumber)
+        targetLabel.text = String(targetValue)
+        scoreLabel.text = String(score)
     }
 
 }
